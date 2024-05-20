@@ -1,0 +1,62 @@
+CREATE DATABASE IF NOT EXISTS miparalegaldb;
+
+USE miparalegaldb;
+
+CREATE TABLE IF NOT EXISTS advogados (
+registro_do_advogado VARCHAR(14) PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+endereco VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS clientes (
+cpf_cnpj_do_cliente VARCHAR(18) PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+nome_do_responsavel VARCHAR(100),
+endereco VARCHAR(200) NOT NULL,
+telefone VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS contratos (
+numero_do_contrato VARCHAR(20) PRIMARY KEY,
+tipo_de_contrato VARCHAR(18) NOT NULL,
+data_de_celebracao DATE NOT NULL,
+validade VARCHAR(13) NOT NULL,
+status_do_contrato VARCHAR(11) NOT NULL,
+cpf_cnpj_do_cliente VARCHAR(18) NOT NULL,
+FOREIGN KEY (cpf_cnpj_do_cliente) REFERENCES clientes(cpf_cnpj_do_cliente)
+);
+
+CREATE TABLE IF NOT EXISTS orgaos (
+identificacao_do_orgao VARCHAR(20) PRIMARY KEY,
+vinculacao_hierarquica VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS processos (
+numero_do_processo INT PRIMARY KEY,
+identificacao_do_orgao VARCHAR(20) NOT NULL,
+fase_processual VARCHAR(17) NOT NULL,
+natureza_da_demanda VARCHAR(27) NOT NULL,
+cpf_cnpj_do_cliente VARCHAR(18) NOT NULL,
+posicao_do_cliente VARCHAR(100) NOT NULL,
+registro_do_advogado VARCHAR(14) NOT NULL,
+status_do_processo VARCHAR(25) NOT NULL,
+data_de_ajuizamento DATE NOT NULL,
+numero_do_contrato VARCHAR(10) NOT NULL,
+FOREIGN KEY (identificacao_do_orgao) REFERENCES orgaos(identificacao_do_orgao),
+FOREIGN KEY (registro_do_advogado) REFERENCES advogados(registro_do_advogado),
+FOREIGN KEY (cpf_cnpj_do_cliente) REFERENCES clientes(cpf_cnpj_do_cliente),
+FOREIGN KEY (numero_do_contrato) REFERENCES contratos(numero_do_contrato)
+);
+
+CREATE TABLE IF NOT EXISTS partes_contrarias (
+numero_do_processo INT,
+cpf VARCHAR(14) NOT NULL,
+FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
+);
+
+CREATE TABLE IF NOT EXISTS andamentos (
+numero_do_processo INT,
+data_do_andamento DATE NOT NULL,
+descricao VARCHAR(1000) NOT NULL,
+FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
+);
