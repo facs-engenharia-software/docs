@@ -1,14 +1,14 @@
-CREATE DATABASE IF NOT EXISTS miparalegaldb;
+CREATE DATABASE miparalegaldb;
 
-USE miparalegaldb;
+\c miparalegaldb;
 
-CREATE TABLE IF NOT EXISTS advogados (
+CREATE TABLE advogados (
 registro_do_advogado VARCHAR(14) PRIMARY KEY,
 nome VARCHAR(100) NOT NULL,
 endereco VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS clientes (
+CREATE TABLE clientes (
 cpf_cnpj_do_cliente VARCHAR(18) PRIMARY KEY,
 nome VARCHAR(100) NOT NULL,
 nome_do_responsavel VARCHAR(100),
@@ -16,7 +16,7 @@ endereco VARCHAR(200) NOT NULL,
 telefone VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS contratos (
+CREATE TABLE contratos (
 numero_do_contrato VARCHAR(20) PRIMARY KEY,
 tipo_de_contrato VARCHAR(18) NOT NULL,
 data_de_celebracao DATE NOT NULL,
@@ -26,12 +26,12 @@ cpf_cnpj_do_cliente VARCHAR(18) NOT NULL,
 FOREIGN KEY (cpf_cnpj_do_cliente) REFERENCES clientes(cpf_cnpj_do_cliente)
 );
 
-CREATE TABLE IF NOT EXISTS orgaos (
+CREATE TABLE orgaos (
 identificacao_do_orgao VARCHAR(20) PRIMARY KEY,
 vinculacao_hierarquica VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS processos (
+CREATE TABLE processos (
 numero_do_processo INT PRIMARY KEY,
 identificacao_do_orgao VARCHAR(20) NOT NULL,
 fase_processual VARCHAR(17) NOT NULL,
@@ -48,13 +48,13 @@ FOREIGN KEY (cpf_cnpj_do_cliente) REFERENCES clientes(cpf_cnpj_do_cliente),
 FOREIGN KEY (numero_do_contrato) REFERENCES contratos(numero_do_contrato)
 );
 
-CREATE TABLE IF NOT EXISTS partes_contrarias (
+CREATE TABLE partes_contrarias (
 numero_do_processo INT,
 cpf VARCHAR(14) NOT NULL,
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
 );
 
-CREATE TABLE IF NOT EXISTS andamentos (
+CREATE TABLE andamentos (
 numero_do_processo INT,
 data_do_andamento DATE NOT NULL,
 descricao VARCHAR(1000) NOT NULL,
