@@ -51,7 +51,8 @@ FOREIGN KEY (numero_do_contrato) REFERENCES contratos(numero_do_contrato)
 
 CREATE TABLE partes_contrarias (
 numero_do_processo INT PRIMARY KEY,
-cpf VARCHAR(14) NOT NULL,
+cpf_cnpj VARCHAR(14) NOT NULL,
+nome VARCHAR(100) NOT NULL,
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
 );
 
