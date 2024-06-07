@@ -63,9 +63,9 @@ descricao VARCHAR(1000) NOT NULL,
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
 );
 
-CREATE TABLE prazos{
+CREATE TABLE prazos(
 numero_do_processo INT PRIMARY KEY,
 descricao VARCHAR(300) NOT NULL,
 data_vencimento DATE NOT NULL
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
-};
+);
