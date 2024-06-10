@@ -1,5 +1,5 @@
 # docs
 Documentação do projeto
 
-Versão atual do documento:
-07/06/2024.
+Versão atual da documentação:
+10/06/2024.
