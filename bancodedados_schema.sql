@@ -69,6 +69,6 @@ CREATE TABLE prazos (
 numero_do_prazo VARCHAR(20) PRIMARY KEY,
 numero_do_processo VARCHAR(20),
 descricao VARCHAR(300) NOT NULL,
-data_vencimento DATE NOT NULL
+data_vencimento DATE NOT NULL,
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
 );
