@@ -27,14 +27,14 @@ FOREIGN KEY (cpf_cnpj_do_cliente) REFERENCES clientes(cpf_cnpj_do_cliente)
 );
 
 CREATE TABLE orgaos (
-identificacao_do_orgao INT PRIMARY KEY,
+identificacao_do_orgao VARCHAR(20) PRIMARY KEY,
 nome_do_orgao VARCHAR(20) NOT NULL,
 vinculacao_hierarquica VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE processos (
-numero_do_processo INT PRIMARY KEY,
-identificacao_do_orgao INT NOT NULL,
+numero_do_processo VARCHAR(20) PRIMARY KEY,
+identificacao_do_orgao VARCHAR(20) NOT NULL,
 fase_processual VARCHAR(17) NOT NULL,
 natureza_da_demanda VARCHAR(27) NOT NULL,
 cpf_cnpj_do_cliente VARCHAR(18) NOT NULL,
@@ -50,21 +50,24 @@ FOREIGN KEY (numero_do_contrato) REFERENCES contratos(numero_do_contrato)
 );
 
 CREATE TABLE partes_contrarias (
-numero_do_processo INT PRIMARY KEY,
+numero_identificador VARCHAR(20) PRIMARY KEY,
+numero_do_processo VARCHAR(20),
 cpf_cnpj VARCHAR(14) NOT NULL,
 nome VARCHAR(100) NOT NULL,
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
 );
 
 CREATE TABLE andamentos (
-numero_do_processo INT PRIMARY KEY,
+numero_do_andamento VARCHAR(20) PRIMARY KEY,
+numero_do_processo VARCHAR(20),
 data_do_andamento DATE NOT NULL,
 descricao VARCHAR(1000) NOT NULL,
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
 );
 
-CREATE TABLE prazos(
-numero_do_processo INT PRIMARY KEY,
+CREATE TABLE prazos (
+numero_do_prazo VARCHAR(20) PRIMARY KEY,
+numero_do_processo VARCHAR(20),
 descricao VARCHAR(300) NOT NULL,
 data_vencimento DATE NOT NULL
 FOREIGN KEY (numero_do_processo) REFERENCES processos(numero_do_processo)
